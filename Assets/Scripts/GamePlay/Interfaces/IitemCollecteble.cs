@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IitemCollecteble
 {
-    public Ingredient CollectItem();
+    public Iingredient CollectItem();
     public bool IsItemReady();
 }

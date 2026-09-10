@@ -1,15 +1,34 @@
 using UnityEngine;
 
-public class Vegetables : MonoBehaviour,Iingredient
+public class Vegetables : MonoBehaviour, Iingredient, IChoppeble
 {
-    public GameObject GetModelPreFab()
+
+    public Ingredient item;
+    public GameObject beforChop, afterChop;
+    private bool isChopped = false;
+    public void CancelChopping()
     {
-        throw new System.NotImplementedException();
+        isChopped = false;
     }
 
-    public Ingredient GetName()
+    public void ChoppItem()
     {
-        throw new System.NotImplementedException();
+        isChopped = true;
+        beforChop.SetActive(false);
+        afterChop.SetActive(true);
+    }
+    public bool IsChopped()
+    {
+        return isChopped;
+    }
+    public string GetName()
+    {
+        return item.ToString();
+    }
+
+    public GameObject GetObjectRef()
+    {
+        return gameObject;
     }
 
     public int GetPoint()
@@ -17,15 +36,5 @@ public class Vegetables : MonoBehaviour,Iingredient
         throw new System.NotImplementedException();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }

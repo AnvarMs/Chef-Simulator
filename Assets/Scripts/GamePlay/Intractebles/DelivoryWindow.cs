@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class DelivoryWindow : MonoBehaviour,IIntractable
 {
+    public void CancelIntract()
+    {
+        
+    }
+
     public void Intract()
     {
        

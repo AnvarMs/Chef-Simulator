@@ -4,9 +4,6 @@ using UnityEngine;
 public class PlayerIntraction : MonoBehaviour
 {
 
-
-    
-    public static Ingredient itemInInHand;
     IIntractable C_Intractable;
 
     private PlayerInputAction inputSystem;
@@ -16,8 +13,14 @@ public class PlayerIntraction : MonoBehaviour
         inputSystem = new PlayerInputAction();
         inputSystem.Enable();
         inputSystem.Player.Interact.started += Interact_started;
-        itemInInHand = Ingredient.Empty;
+        inputSystem.Player.Interact.canceled += Interact_canceled;
 
+    }
+
+    private void Interact_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (C_Intractable != null)
+            C_Intractable.CancelIntract();
     }
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)

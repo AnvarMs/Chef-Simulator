@@ -2,23 +2,29 @@ using UnityEngine;
 
 public class Trash : MonoBehaviour,IIntractable
 {
+    public void CancelIntract()
+    {
+        
+    }
+
     public void Intract()
     {
         DismantleItem();
     }
     private void DismantleItem()
     {
-        if (PlayerIntraction.itemInInHand == Ingredient.Empty){
+        GameObject item = Inventory.Instance.GetItem();
+        if (item == null){
             UIManger.Instance.ShowWarning("No item to Dismatle");
             return;
             }
 
         else{
 
-            UIManger.Instance.ShowWarning($"{PlayerIntraction.itemInInHand.ToString()} Dismantled");
-        PlayerIntraction.itemInInHand = Ingredient.Empty;
-        UIManger.Instance.OnCollectItem(Ingredient.Empty);
-                }
+            UIManger.Instance.ShowWarning($"{item.GetComponent<Iingredient>().GetName()} Dismantled");
+            Destroy(item);
+            UIManger.Instance.OnCollectItem("");
+            }
     }
     
 }

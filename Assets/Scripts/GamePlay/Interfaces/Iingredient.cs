@@ -4,12 +4,11 @@ public enum Ingredient
 {
     Meet,
     Cheese,
-    Vegetables,
-    Empty
+    Vegetables
 }
 public interface Iingredient
 {
-    public Ingredient GetName();
+    public string GetName();
     public int GetPoint();
-    public GameObject GetModelPreFab();
+    public GameObject GetObjectRef();
 }

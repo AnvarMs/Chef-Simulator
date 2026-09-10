@@ -1,18 +1,19 @@
 using UnityEngine;
 
-public class Refrigerator : MonoBehaviour,IIntractable,IitemCollecteble
+public class Refrigerator : MonoBehaviour,IIntractable
 {
 
     public GameObject refrigeratorUI;
-    private Ingredient selectedIngrediant;
+    public GameObject[] ItemData;
+    private int selectedID;
     public void Intract()
     {
         ShowUi();
     }
 
-    public void OnSelectIngrediant(int n)
+    public void OnSelectIngrediant(int id)
     {
-        selectedIngrediant = (Ingredient)n;
+        selectedID =  id;
     }
     public void ShowUi()
     {
@@ -21,25 +22,15 @@ public class Refrigerator : MonoBehaviour,IIntractable,IitemCollecteble
     public void HideUi()
     {
         refrigeratorUI.SetActive(false);
-        if (PlayerIntraction.itemInInHand == Ingredient.Empty)
-        {
-            PlayerIntraction.itemInInHand = CollectItem();
-            UIManger.Instance.OnCollectItem(CollectItem());
-        }
-        else
-        {
-            UIManger.Instance.ShowWarning("Inventory is full");
-        }
-    }
-
-    public Ingredient CollectItem()
-    {
+        GameObject obj = Instantiate(ItemData[selectedID]);
+        Inventory.Instance.SetItem(obj);
         
-        return selectedIngrediant;
     }
 
-    public bool IsItemReady()
+    
+
+    public void CancelIntract()
     {
-        return true;
+       
     }
 }

@@ -1,15 +1,23 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
-public class Meet : MonoBehaviour,Iingredient
+public class Meet : MonoBehaviour,Iingredient,ICookeble
 {
-    public GameObject GetModelPreFab()
+    public Ingredient item;
+
+    public void Cookitem()
     {
         throw new System.NotImplementedException();
     }
 
-    public Ingredient GetName()
+    public string GetName()
     {
-        throw new System.NotImplementedException();
+        return item.ToString();
+    }
+
+    public GameObject GetObjectRef()
+    {
+        return gameObject;
     }
 
     public int GetPoint()
@@ -17,15 +25,8 @@ public class Meet : MonoBehaviour,Iingredient
         throw new System.NotImplementedException();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public bool IsCooked()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        throw new System.NotImplementedException();
     }
 }

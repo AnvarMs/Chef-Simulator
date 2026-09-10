@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class Cheese : MonoBehaviour,Iingredient
 {
-    public GameObject GetModelPreFab()
+    public Ingredient item;
+
+    public string GetName()
     {
-        throw new System.NotImplementedException();
+        return item.ToString();
     }
 
-    public Ingredient GetName()
+    public GameObject GetObjectRef()
     {
-        throw new System.NotImplementedException();
+       return gameObject;
     }
 
     public int GetPoint()
@@ -17,15 +19,5 @@ public class Cheese : MonoBehaviour,Iingredient
         throw new System.NotImplementedException();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

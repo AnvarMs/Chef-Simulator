@@ -24,11 +24,11 @@ public class UIManger : MonoBehaviour
 
     private void Start()
     {
-        OnCollectItem(PlayerIntraction.itemInInHand);
+       
     }
-    public void OnCollectItem(Ingredient ingredient)
+    public void OnCollectItem(string name)
     {
-        ItemNameText.text = ingredient.ToString();
+        ItemNameText.text = name;
     }
 
     public void ShowWarning(string message)

@@ -2,20 +2,16 @@ using UnityEngine;
 
 public class Stove : MonoBehaviour,IIntractable
 {
+
+    public GameObject item1, item2;
     public void Intract()
     {
       
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    
+    public void CancelIntract()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+       
     }
 }
