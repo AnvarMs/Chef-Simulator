@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Stove : MonoBehaviour,IIntractable
 {
@@ -14,76 +13,120 @@ public class Stove : MonoBehaviour,IIntractable
     public void Intract()
     {
         eItem = Inventory.Instance.GetItem();
+
+
         if (eItem != null)
         {
-            ICookeble t_cookeble = eItem.GetComponent<ICookeble>();
-            if (t_cookeble != null)
-            {
-                if (!t_cookeble.IsCooked())
-                {
-                    TryCookItem(eItem);
-                }
-                else
-                {
-                    UIManger.Instance.ShowWarning("Item already cooked");
-                    ReturnItemToInv(eItem);
-                }
-            }
-            else
-            {
-                UIManger.Instance.ShowWarning("Item is not cookeble");
+            ICookeble cookable = eItem.GetComponent<ICookeble>();
 
+            // Holding a cooked item -> return it to inventory
+            if (cookable != null && cookable.IsCooked())
+            {
                 ReturnItemToInv(eItem);
+
+                UIManger.Instance.ShowWarning(
+                    $"{eItem.GetComponent<Iingredient>().GetName()} is collected"
+                );
+
+                return;
             }
-            
+
+            if (item1 != null && item2 != null)
+            {
+                UIManger.Instance.ShowWarning("Stove is full");
+                ReturnItemToInv(eItem);
+                return;
+            }
+
+            if (cookable!=null&& !cookable.IsCooked()){
+                TryCookItem(eItem);
+                return;
+            }
+
+            UIManger.Instance.ShowWarning("Item is not cookable");
+            ReturnItemToInv(eItem);
+            return;
         }
         else
         {
+
+
+
+
             if (item1 != null && item1.GetComponent<ICookeble>().IsCooked())
             {
-                ReturnItemToInv(item1);
-                UIManger.Instance.ShowWarning($"{item1.GetComponent<Iingredient>().GetName()} is collected");
-                return;
-            }
-            if (item2 != null && item2.GetComponent<ICookeble>().IsCooked())
-            {
-                ReturnItemToInv(item2);
-                UIManger.Instance.ShowWarning($"{item2.GetComponent<Iingredient>().GetName()} is collected");
+                CollectItem(ref item1);
                 return;
             }
 
+            if (item2 != null && item2.GetComponent<ICookeble>().IsCooked())
+            {
+                CollectItem(ref item2);
+                return;
+            }
+
+
+
         }
+
+       
     }
-    
+
+
+
     private void ReturnItemToInv(GameObject obj)
     {
         Inventory.Instance.SetItem(obj);
     }
+    private void CollectItem(ref GameObject item)
+    {
+        GameObject collectedItem = item;
+        item = null;
+
+        ReturnItemToInv(collectedItem);
+
+        UIManger.Instance.ShowWarning(
+            $"{collectedItem.GetComponent<Iingredient>().GetName()} is collected"
+        );
+    }
+
     private void TryCookItem(GameObject obj)
     {
         if (item1 == null)
         {
             item1 = obj;
+
             item1.transform.SetParent(item1PlacePos);
             item1.transform.position = item1PlacePos.position;
+
             StartCoroutine(CookItem(item1Text, item1.GetComponent<ICookeble>()));
-        }else if(item2 == null)
+
+            UIManger.Instance.ShowWarning(
+                $"{obj.GetComponent<Iingredient>().GetName()} is Cooking"
+            );
+        }
+        else if (item2 == null)
         {
             item2 = obj;
+
             item2.transform.SetParent(item2PlacePos);
             item2.transform.position = item2PlacePos.position;
+
             StartCoroutine(CookItem(item2Text, item2.GetComponent<ICookeble>()));
+
+            UIManger.Instance.ShowWarning(
+                $"{obj.GetComponent<Iingredient>().GetName()} is Cooking"
+            );
         }
         else
         {
+            // Stove is full, give item back to player
+            ReturnItemToInv(obj);
+
             UIManger.Instance.ShowWarning("Stove is full");
-            return;
         }
-
-
-        UIManger.Instance.ShowWarning($"{obj.GetComponent<Iingredient>().GetName()} is Cooking");
-
     }
+
 
 
 

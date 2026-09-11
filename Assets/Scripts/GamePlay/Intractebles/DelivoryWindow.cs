@@ -90,7 +90,9 @@ public class DelivoryWindow : MonoBehaviour,IIntractable
 
         if (matchedIndex == -1)
         {
+            Inventory.Instance.SetItem(item);
             UIManger.Instance.ShowWarning("Wrong Ingredient");
+
             return;
         }
 

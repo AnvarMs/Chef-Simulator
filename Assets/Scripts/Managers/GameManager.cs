@@ -80,6 +80,6 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateUI();
-        SceneManager.LoadScene("GameOverScene");
+        SceneManager.LoadScene("GameOver");
     }
 }
