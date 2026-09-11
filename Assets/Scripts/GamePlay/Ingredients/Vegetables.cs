@@ -25,6 +25,10 @@ public class Vegetables : MonoBehaviour, Iingredient, IChoppeble
     {
         return item.ToString();
     }
+    public Ingredient GetIngredient()
+    {
+        return item;
+    }
 
     public GameObject GetObjectRef()
     {

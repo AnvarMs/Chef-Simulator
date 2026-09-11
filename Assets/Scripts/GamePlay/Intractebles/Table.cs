@@ -37,6 +37,7 @@ public class Table : MonoBehaviour,IIntractable
         if (choppeble == null)
         {
             UIManger.Instance.ShowWarning("Item Not Choppable");
+            Inventory.Instance.SetItem(item);
             return;
         }
 
@@ -44,6 +45,7 @@ public class Table : MonoBehaviour,IIntractable
         if (choppeble.IsChopped())
         {
             UIManger.Instance.ShowWarning("Item already chopped");
+            Inventory.Instance.SetItem(item);
             return;
         }
 

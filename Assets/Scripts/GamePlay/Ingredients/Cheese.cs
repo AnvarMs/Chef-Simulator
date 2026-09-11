@@ -18,6 +18,9 @@ public class Cheese : MonoBehaviour,Iingredient
     {
         throw new System.NotImplementedException();
     }
+    public Ingredient GetIngredient()
+    {
+        return item;
+    }
 
-   
 }

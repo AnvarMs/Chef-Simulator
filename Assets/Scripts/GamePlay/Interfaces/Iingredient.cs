@@ -8,6 +8,7 @@ public enum Ingredient
 }
 public interface Iingredient
 {
+    public Ingredient GetIngredient();
     public string GetName();
     public int GetPoint();
     public GameObject GetObjectRef();

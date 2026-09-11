@@ -5,9 +5,13 @@ public class Meet : MonoBehaviour,Iingredient,ICookeble
 {
     public Ingredient item;
 
+    public GameObject beforCook, afterCook;
+    public bool isCooked = false;
     public void Cookitem()
     {
-        throw new System.NotImplementedException();
+        beforCook.SetActive(false);
+        afterCook.SetActive(true);
+        isCooked = true;
     }
 
     public string GetName()
@@ -22,11 +26,14 @@ public class Meet : MonoBehaviour,Iingredient,ICookeble
 
     public int GetPoint()
     {
-        throw new System.NotImplementedException();
+        return 0;
     }
-
+    public Ingredient GetIngredient()
+    {
+        return item;
+    }
     public bool IsCooked()
     {
-        throw new System.NotImplementedException();
+        return isCooked;
     }
 }
